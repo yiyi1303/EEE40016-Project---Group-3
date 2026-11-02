@@ -1,0 +1,235 @@
+{
+  "_comment": "Single source of truth for the twin node. Nothing downstream hard-codes these numbers.",
+  "project": {
+    "unit": "EEE40016 Design of Smart Power Grids",
+    "node": "Digital twin server",
+    "owner": "Munir Aslam (104362241)"
+  },
+  "cases": {
+    "benchmark": {
+      "purpose": "Validation item V1 only. Must reproduce the published IEEE solution, so NOTHING here may be altered.",
+      "transformer_kva": 800,
+      "transformer_xhl_percent": 4.0,
+      "ev_penetration": 0.0,
+      "battery": false,
+      "pv": false,
+      "reference_solution": "data/feeder/Solutions/OpenDSS/Snapshots/Snapshot_566min_On Peak.xlsx",
+      "pass_criterion": "every node voltage within 0.5% of the published value",
+      "source_pu": 1.05,
+      "source_pu_note": "As published. Must not change: V1 compares against the IEEE reference solution, which was solved at 1.05 pu."
+    },
+    "study": {
+      "purpose": "All research runs, stages S1 to S4.",
+      "transformer_kva": 150,
+      "transformer_xhl_percent": 4.0,
+      "transformer_rerate_note": "The published feeder ships an 800 kVA unit. Evening peak with 40% EV penetration reaches about 169 kW, which is 21% of 800 kVA, so transformer thermal loading could never become a binding constraint and the IEC 60076-7 criterion would be inert. Re-rated to 150 kVA so that thermal loading binds at the evening peak, as the research design requires. Percentage impedance is held at 4%, so the ohmic series impedance rises with the smaller rating, which is the physically correct behaviour for a smaller unit. Update 2 Oct 2026: the 169 kW came from the stand-in sessions, which carried about three times the EV energy any evidence supports. With the decided demand the unmanaged evening peak is about 68 kW median (85 kW at the 95th percentile) for s1 and 84 kW (104 kW) for s2 (notes/demand_scenarios.md), so the transformer rarely binds. 150 kVA is kept rather than shrunk again to manufacture congestion; cable current and unbalance are the constraints that matter on this feeder.",
+      "ev_penetration": 0.4,
+      "ev_connections": 22,
+      "session_source": "vista",
+      "plugin_model": "s1",
+      "stress_plugin_model": "s2",
+      "plugin_model_note": "Decided 2 Oct 2026 (plan amendment 27). Main case s1: each car plugs in on an evening with probability 0.34, the share of days with any charging in the Jemena-led Melbourne trial (ARENA 2023), wanting everything driven since its last plug-in (VISTA daily driving, 21-day warm-up), about 21 kWh per session. Stress case s2: the distributor design day (UoM for ENA/C4NET), probability 0.70, two days of driving per session. 'daily' (every car every evening) is kept only for the validation checks recorded on it. Run the stress case with --plugin-model s2.",
+      "battery": true,
+      "pv": true,
+      "source_pu": 1.0,
+      "source_pu_note": "The published 1.05 pu leaves the feeder at 252.8 V against a 253 V limit with no EV load at all, 0.2 V of headroom. Unbalanced single-phase charging shifts the neutral and lifts the lightly loaded phases over the limit, so overvoltage fires on the arrival of the first few cars regardless of what limit the controller sets. A distributor seeing 252.8 V at light load would tap down; 1.00 pu represents that. Recorded as an assumption.",
+      "pv_share": 0.6,
+      "pv_seed": 101,
+      "pv_note": "Table 7: rooftop PV on 60% of connections (33 of 55), chosen once with pv_seed and fixed across all runs. Profile in data/pv_profile.csv, built by src/make_scenario_data.py.",
+      "battery_note": "Table 7: one unit at the feeder's electrical midpoint (bus 686, computed by feeder_csv.electrical_midpoint). Stand-in model in src/battery.py, to be replaced by Gia's."
+    }
+  },
+  "network": {
+    "source": "IEEE PES Test Feeder Working Group, European Low Voltage Test Feeder",
+    "package": "data/feeder/European_LV_CSV",
+    "nodes": 906,
+    "lines": 905,
+    "customer_connections": 55,
+    "voltage_hv_kv": 11.0,
+    "voltage_lv_v": 416.0,
+    "frequency_hz": 50
+  },
+  "study_window": {
+    "start": "16:00",
+    "end": "22:00",
+    "control_period_minutes": 5,
+    "control_steps": 72,
+    "telemetry_period_seconds": 30
+  },
+  "constraints": {
+    "_comment": "A run is only counted if every one of these holds at every control step.",
+    "voltage": {
+      "standard": "AS 60038",
+      "nominal_v": 230.0,
+      "min_v": 216.2,
+      "max_v": 253.0
+    },
+    "cable_current": {
+      "basis": "line code rating from the feeder package",
+      "max_loading_percent": 100.0
+    },
+    "transformer_loading": {
+      "max_loading_percent": 100.0
+    },
+    "transformer_thermal": {
+      "standard": "IEC 60076-7 exponential model",
+      "max_hot_spot_c": 98.0,
+      "ambient_source": "data/ambient.csv (BOM Melbourne Olympic Park, 30 Sep 2026, see data/scenario_provenance.json)"
+    },
+    "voltage_unbalance": {
+      "max_vuf_percent": 2.0
+    }
+  },
+  "controllers": {
+    "_comment": "Labels as in Table 2 of the plan (amendment 17). Descriptive only: no code reads this section; the controllers are src/controllers.py.",
+    "A": {
+      "name": "static limit",
+      "description": "one fixed limit per charge point all evening, no telemetry; the baseline every run is scored against. Calibrated per seed as the largest limit that never violates (amendment 1), not the plan's 7.2 kW"
+    },
+    "B": {
+      "name": "trust-weighted",
+      "description": "the envelope, pulled towards the 1.4 kW floor as trust in the data falls"
+    },
+    "C": {
+      "name": "binary fallback",
+      "description": "full envelope while data is fresh, back to the static limit once the stale timeout expires"
+    }
+  },
+  "envelope": {
+    "allocation_rule": "equal share among simultaneously charging connections (assumption A8)",
+    "search": "bisection",
+    "min_kw": 0.0,
+    "max_kw": 7.2,
+    "tolerance_kw": 0.1,
+    "expected_solves_per_step": 7,
+    "security_factor": 0.95,
+    "security_factor_note": "Limits are tightened by this factor when the envelope is computed, and the true limits are used when the result is judged. Without it the envelope is exactly maximal and has no headroom, so any drift between the telemetry the twin acted on and the network it acted upon produces a violation. 1.0 disables it.",
+    "margin_mode": "age",
+    "margin_mode_note": "'flat' applies security_factor at every age. 'age' reads the margin off age_margin_curve, so an old picture is planned with more headroom than a fresh one.",
+    "application_lag_note": "With setpoint schedules (amendment 25), entry k is planned at data lag + 5k minutes on both curves below, because each curve is the 95th-percentile drift of the persistence forecast over exactly that lag.",
+    "age_margin_curve": [
+      [
+        0,
+        0.01
+      ],
+      [
+        1,
+        0.068
+      ],
+      [
+        2,
+        0.085
+      ],
+      [
+        3,
+        0.107
+      ],
+      [
+        5,
+        0.127
+      ],
+      [
+        7,
+        0.145
+      ],
+      [
+        10,
+        0.16
+      ],
+      [
+        15,
+        0.171
+      ]
+    ],
+    "age_margin_curve_note": "[age in minutes, margin as a fraction of each limit]. Measured: 95th-percentile drift of per-phase household demand over that lag, 15:00-22:00, from the feeder's own 1-minute profiles, as a fraction of 40.25 kW (one phase of the 175 A head cable at 230 V, the constraint that binds most often). Held flat beyond 15 minutes, where drift saturates and the 15-minute stale timeout has already taken trust to zero.",
+    "age_margin_floor_note": "The curve starts at 1%, not 0. A margin of exactly zero is never safe: the power flow converges to a tolerance, and identical loads solved from different starting states give currents that differ by about 0.006% of the head cable rating, enough to tip a zero-margin envelope over its limit (seen at seed 8, step 66). 1% is well above that numerical noise and of the order of Class 1 revenue-meter accuracy, the real uncertainty in a connection-point reading.",
+    "vuf_margin_curve_pp": [
+      [
+        0,
+        0.05
+      ],
+      [
+        1,
+        0.325
+      ],
+      [
+        2,
+        0.42
+      ],
+      [
+        3,
+        0.455
+      ],
+      [
+        5,
+        0.533
+      ],
+      [
+        7,
+        0.554
+      ],
+      [
+        10,
+        0.61
+      ],
+      [
+        15,
+        0.752
+      ]
+    ],
+    "vuf_margin_note": "Voltage unbalance gets its own margin, in percentage points off the 2% limit, because it is far more sensitive to stale data than cable current: one house on one phase moving a few kW in a minute shifts it by more than 0.1 pp. Measured 1 Oct 2026: 95th-percentile drift of the worst-bus unbalance over each lag, 15:00-22:00 at one-minute steps, with PV and every EV charging at 3 kW (the larger of the two conditions measured). The flat 5% margin gave 0.10 pp, about a third of the one-minute drift, which is why fresh-data runs broke the limit. Floor 0.05 pp, as for the cable curve (item 13).",
+    "age_lag_note": "Both curves are read at the age of the values, not the age of the timestamp: a sample half a minute old carries the previous minute's profile reading, so it is indexed as a one-minute lag (ceil of the age in minutes)."
+  },
+  "sweep": {
+    "S1_latency_s": [
+      0,
+      5,
+      30,
+      60,
+      120,
+      300,
+      600
+    ],
+    "S1_loss_percent": [
+      0,
+      1,
+      5,
+      10,
+      20,
+      40
+    ],
+    "S1_points": 42,
+    "seeds": [
+      7
+    ],
+    "runtime_budget_hours": 12,
+    "review_after_points": 10
+  },
+  "sincal": {
+    "database_mode": "SQLITE",
+    "schema_template": "Lab1_files/database.db",
+    "tables_of_interest": [
+      "Node",
+      "Line",
+      "Load",
+      "TwoWindingTransformer"
+    ]
+  },
+  "controller_settings": {
+    "_comment": "Controllers A and C share the same fallback so the comparison is about the shape of the response to bad data, not about a different safe limit.",
+    "fallback_kw": 1.4,
+    "fallback_basis": "A 6 A single-phase charge, the lowest setting a typical AC charge point will accept. Chosen as the load-side counterpart to the 1.5 kW export fallback used in the SA Power Networks flexible exports rollout [2].",
+    "binary_trust_threshold": 0.5,
+    "stale_timeout_min": 15.0,
+    "trust_loss_weight": 1.0,
+    "trust_loss_weight_note": "Trust = age term x (1 - w x loss) x plausibility. w = 1 penalises loss linearly on top of age, w = 0 is age-only. Age already reflects what loss does to data freshness, so w is a judgement about whether a lossy link is a warning sign in its own right. Owned by the telemetry node.",
+    "edge_fallback_timeout_min": 15.0,
+    "edge_fallback_timeout_note": "How long a charge point keeps acting on its last setpoint before falling back to fallback_kw. Owned by the EV controller node; set equal to the twin's stale timeout so both ends give up on old information at the same age.",
+    "setpoint_schedule": true,
+    "setpoint_schedule_note": "Plan amendment 25. Each downlink message is a schedule of H five-minute entries (a DERControlList), H derived from edge_fallback_timeout_min so the schedule runs out exactly when the edge timeout would fire (3 at 15 min). Entry k is planned with the margin for the lag it will have when applied, data lag + 5k minutes, and the edge applies the entry for the current interval, then the 1.4 kW default. false reproduces the single held setpoint of amendments 22-24, bit for bit, as the paired baseline.",
+    "schedule_age_basis": "data",
+    "schedule_age_basis_note": "What the controller law sees on entries k >= 1. 'data': the trust and age of the observation the schedule was planned from, so controllers A, B and C are exactly as in Table 2 and only the envelope's margin changes. 'application': trust and age at the time the entry is applied (age + 5k), a sensitivity variant that separates the margin effect from the trust-law effect.",
+    "uncovered_kw": 1.4,
+    "uncovered_kw_note": "What a car that plugged in after the governing setpoint was issued may draw (amendment 22): 1.4 kW, the fallback. 0.0 makes it wait for a setpoint that covers it, a sensitivity variant. Owned by the EV controller node."
+  }
+}
