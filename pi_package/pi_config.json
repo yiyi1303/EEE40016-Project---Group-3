@@ -1,0 +1,10 @@
+{
+  "fallback_kw": 1.4,
+  "uncovered_kw": 1.4,
+  "control_period_minutes": 5,
+  "sample_min": 0.5,
+  "default_scenario": "s1",
+  "ev_connections": 22,
+  "paho_mqtt": "2.1.0",
+  "built": "2026-10-12 13:32"
+}

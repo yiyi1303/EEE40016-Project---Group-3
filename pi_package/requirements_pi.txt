@@ -1,0 +1,3 @@
+# Not needed: a copy of paho-mqtt is included in paho/. Kept for anyone who
+# prefers an installed one; the copy in paho/ is used first either way.
+paho-mqtt>=1.6
