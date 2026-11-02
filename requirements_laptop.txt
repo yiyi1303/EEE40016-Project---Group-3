@@ -1,0 +1,17 @@
+# The laptop side of the EEE40016 digital twin. Python 3.10 or newer. Install once, from
+# this folder:
+#     py -m pip install -r requirements_laptop.txt          (Windows)
+#     python3 -m pip install -r requirements_laptop.txt     (Mac)
+# These are the versions every result so far was made with (Python 3.14, Windows 11). If
+# pip cannot find one of them for your Python, delete its "==version" and install again;
+# the runs still work, but tell Munir, as results can then differ in the last digits.
+
+opendssdirect.py==0.9.4    # the power-flow engine; installs numpy with it
+paho-mqtt==2.1.0           # MQTT client
+amqtt==0.12.1              # the MQTT broker that runs on the laptop
+
+# Optional: only for redrawing figures and rebuilding the guides, and for check V1
+matplotlib
+reportlab
+pillow
+openpyxl
