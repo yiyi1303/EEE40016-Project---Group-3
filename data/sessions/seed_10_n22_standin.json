@@ -1,0 +1,239 @@
+{
+  "seed": 10,
+  "source": "standin",
+  "provenance": "PROVISIONAL stand-in distributions",
+  "parameters": {
+    "arrival_mean_h": 18.6,
+    "arrival_sd_h": 1.0,
+    "arrival_clip_h": [
+      16.1,
+      21.0
+    ],
+    "energy_kwh_range": [
+      8.0,
+      26.0
+    ]
+  },
+  "sessions": [
+    {
+      "load_name": "LOAD28",
+      "ev_name": "EV_LOAD28",
+      "arrival_min": 1018,
+      "energy_kwh": 11.306026049792624,
+      "bus": "556",
+      "phase": "C",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD41",
+      "ev_name": "EV_LOAD41",
+      "arrival_min": 1020,
+      "energy_kwh": 16.49716148223411,
+      "bus": "755",
+      "phase": "B",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD51",
+      "ev_name": "EV_LOAD51",
+      "arrival_min": 1028,
+      "energy_kwh": 21.82765887571149,
+      "bus": "896",
+      "phase": "A",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD42",
+      "ev_name": "EV_LOAD42",
+      "arrival_min": 1035,
+      "energy_kwh": 15.84963050462629,
+      "bus": "778",
+      "phase": "C",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD4",
+      "ev_name": "EV_LOAD4",
+      "arrival_min": 1048,
+      "energy_kwh": 25.564150685809636,
+      "bus": "73",
+      "phase": "A",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD16",
+      "ev_name": "EV_LOAD16",
+      "arrival_min": 1052,
+      "energy_kwh": 10.938734482790046,
+      "bus": "320",
+      "phase": "C",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD35",
+      "ev_name": "EV_LOAD35",
+      "arrival_min": 1059,
+      "energy_kwh": 22.69285005106113,
+      "bus": "639",
+      "phase": "B",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD10",
+      "ev_name": "EV_LOAD10",
+      "arrival_min": 1060,
+      "energy_kwh": 15.686945349805892,
+      "bus": "248",
+      "phase": "B",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD14",
+      "ev_name": "EV_LOAD14",
+      "arrival_min": 1062,
+      "energy_kwh": 17.619191521431553,
+      "bus": "289",
+      "phase": "A",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD27",
+      "ev_name": "EV_LOAD27",
+      "arrival_min": 1077,
+      "energy_kwh": 16.460078798450304,
+      "bus": "539",
+      "phase": "C",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD45",
+      "ev_name": "EV_LOAD45",
+      "arrival_min": 1095,
+      "energy_kwh": 10.834489096816863,
+      "bus": "813",
+      "phase": "B",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD40",
+      "ev_name": "EV_LOAD40",
+      "arrival_min": 1097,
+      "energy_kwh": 15.290589686770868,
+      "bus": "702",
+      "phase": "B",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD6",
+      "ev_name": "EV_LOAD6",
+      "arrival_min": 1099,
+      "energy_kwh": 19.96425845072182,
+      "bus": "83",
+      "phase": "B",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD7",
+      "ev_name": "EV_LOAD7",
+      "arrival_min": 1116,
+      "energy_kwh": 23.71106382972213,
+      "bus": "178",
+      "phase": "B",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD50",
+      "ev_name": "EV_LOAD50",
+      "arrival_min": 1127,
+      "energy_kwh": 13.806413936093413,
+      "bus": "886",
+      "phase": "B",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD33",
+      "ev_name": "EV_LOAD33",
+      "arrival_min": 1130,
+      "energy_kwh": 24.52322228658174,
+      "bus": "619",
+      "phase": "C",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD5",
+      "ev_name": "EV_LOAD5",
+      "arrival_min": 1131,
+      "energy_kwh": 8.470839488148783,
+      "bus": "74",
+      "phase": "A",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD26",
+      "ev_name": "EV_LOAD26",
+      "arrival_min": 1146,
+      "energy_kwh": 16.78374763070831,
+      "bus": "522",
+      "phase": "B",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD3",
+      "ev_name": "EV_LOAD3",
+      "arrival_min": 1189,
+      "energy_kwh": 19.303864067594976,
+      "bus": "70",
+      "phase": "A",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD24",
+      "ev_name": "EV_LOAD24",
+      "arrival_min": 1192,
+      "energy_kwh": 12.452141965949242,
+      "bus": "458",
+      "phase": "C",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD38",
+      "ev_name": "EV_LOAD38",
+      "arrival_min": 1208,
+      "energy_kwh": 11.245333276735959,
+      "bus": "688",
+      "phase": "B",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD21",
+      "ev_name": "EV_LOAD21",
+      "arrival_min": 1260,
+      "energy_kwh": 16.67157647622706,
+      "bus": "387",
+      "phase": "A",
+      "home_arrival_min": -1,
+      "pre_window_kwh": 0.0
+    }
+  ]
+}

@@ -1,0 +1,230 @@
+{
+  "seed": 15,
+  "source": "vista",
+  "provenance": "VISTA 2024-2025 trips, Transport Victoria open data, fitted by src/vista_sessions.py (data item D4)",
+  "parameters": {
+    "see": "data/vista/ev_sessions_summary.json"
+  },
+  "sessions": [
+    {
+      "load_name": "LOAD26",
+      "ev_name": "EV_LOAD26",
+      "arrival_min": 960,
+      "energy_kwh": 0.0,
+      "bus": "522",
+      "phase": "B",
+      "home_arrival_min": 916,
+      "pre_window_kwh": 0.459
+    },
+    {
+      "load_name": "LOAD3",
+      "ev_name": "EV_LOAD3",
+      "arrival_min": 960,
+      "energy_kwh": 1.994,
+      "bus": "70",
+      "phase": "A",
+      "home_arrival_min": 930,
+      "pre_window_kwh": 3.6
+    },
+    {
+      "load_name": "LOAD40",
+      "ev_name": "EV_LOAD40",
+      "arrival_min": 960,
+      "energy_kwh": 0.715,
+      "bus": "702",
+      "phase": "B",
+      "home_arrival_min": 945,
+      "pre_window_kwh": 1.8
+    },
+    {
+      "load_name": "LOAD41",
+      "ev_name": "EV_LOAD41",
+      "arrival_min": 960,
+      "energy_kwh": 0.0,
+      "bus": "755",
+      "phase": "B",
+      "home_arrival_min": 750,
+      "pre_window_kwh": 3.675
+    },
+    {
+      "load_name": "LOAD5",
+      "ev_name": "EV_LOAD5",
+      "arrival_min": 960,
+      "energy_kwh": 10.685,
+      "bus": "74",
+      "phase": "A",
+      "home_arrival_min": 960,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD50",
+      "ev_name": "EV_LOAD50",
+      "arrival_min": 960,
+      "energy_kwh": 0.0,
+      "bus": "886",
+      "phase": "B",
+      "home_arrival_min": 922,
+      "pre_window_kwh": 2.265
+    },
+    {
+      "load_name": "LOAD7",
+      "ev_name": "EV_LOAD7",
+      "arrival_min": 960,
+      "energy_kwh": 2.357,
+      "bus": "178",
+      "phase": "B",
+      "home_arrival_min": 960,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD4",
+      "ev_name": "EV_LOAD4",
+      "arrival_min": 965,
+      "energy_kwh": 1.398,
+      "bus": "73",
+      "phase": "A",
+      "home_arrival_min": 965,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD10",
+      "ev_name": "EV_LOAD10",
+      "arrival_min": 995,
+      "energy_kwh": 3.596,
+      "bus": "248",
+      "phase": "B",
+      "home_arrival_min": 995,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD28",
+      "ev_name": "EV_LOAD28",
+      "arrival_min": 1005,
+      "energy_kwh": 5.421,
+      "bus": "556",
+      "phase": "C",
+      "home_arrival_min": 1005,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD27",
+      "ev_name": "EV_LOAD27",
+      "arrival_min": 1015,
+      "energy_kwh": 4.837,
+      "bus": "539",
+      "phase": "C",
+      "home_arrival_min": 1015,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD33",
+      "ev_name": "EV_LOAD33",
+      "arrival_min": 1020,
+      "energy_kwh": 8.246,
+      "bus": "619",
+      "phase": "C",
+      "home_arrival_min": 1020,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD6",
+      "ev_name": "EV_LOAD6",
+      "arrival_min": 1042,
+      "energy_kwh": 14.047,
+      "bus": "83",
+      "phase": "B",
+      "home_arrival_min": 1042,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD51",
+      "ev_name": "EV_LOAD51",
+      "arrival_min": 1050,
+      "energy_kwh": 23.498,
+      "bus": "896",
+      "phase": "A",
+      "home_arrival_min": 1050,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD45",
+      "ev_name": "EV_LOAD45",
+      "arrival_min": 1057,
+      "energy_kwh": 3.205,
+      "bus": "813",
+      "phase": "B",
+      "home_arrival_min": 1057,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD16",
+      "ev_name": "EV_LOAD16",
+      "arrival_min": 1090,
+      "energy_kwh": 9.789,
+      "bus": "320",
+      "phase": "C",
+      "home_arrival_min": 1090,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD21",
+      "ev_name": "EV_LOAD21",
+      "arrival_min": 1095,
+      "energy_kwh": 5.094,
+      "bus": "387",
+      "phase": "A",
+      "home_arrival_min": 1095,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD42",
+      "ev_name": "EV_LOAD42",
+      "arrival_min": 1096,
+      "energy_kwh": 6.399,
+      "bus": "778",
+      "phase": "C",
+      "home_arrival_min": 1096,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD38",
+      "ev_name": "EV_LOAD38",
+      "arrival_min": 1175,
+      "energy_kwh": 13.082,
+      "bus": "688",
+      "phase": "B",
+      "home_arrival_min": 1175,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD14",
+      "ev_name": "EV_LOAD14",
+      "arrival_min": 1290,
+      "energy_kwh": 4.722,
+      "bus": "289",
+      "phase": "A",
+      "home_arrival_min": 1290,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD24",
+      "ev_name": "EV_LOAD24",
+      "arrival_min": 1290,
+      "energy_kwh": 1.508,
+      "bus": "458",
+      "phase": "C",
+      "home_arrival_min": 1290,
+      "pre_window_kwh": 0.0
+    },
+    {
+      "load_name": "LOAD35",
+      "ev_name": "EV_LOAD35",
+      "arrival_min": 1605,
+      "energy_kwh": 20.499,
+      "bus": "639",
+      "phase": "B",
+      "home_arrival_min": 1605,
+      "pre_window_kwh": 0.0
+    }
+  ]
+}

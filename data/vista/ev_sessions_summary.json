@@ -1,0 +1,30 @@
+{
+  "source": "VISTA 2024-2025 trips, Transport Victoria open data",
+  "person_days_used": 1765,
+  "excluded": {
+    "did not drive": 1340,
+    "never arrived home": 33,
+    "day ended away from home": 26
+  },
+  "model": {
+    "kwh_per_km": 0.17,
+    "charger_efficiency": 0.9,
+    "battery_cap_kwh": 60.0,
+    "min_driver_km": 1.0
+  },
+  "arrival_home_weighted": {
+    "p10": 812,
+    "p25": 945,
+    "median": 1055,
+    "p75": 1168,
+    "p90": 1301
+  },
+  "share_arriving_16_22": 0.652,
+  "share_arriving_before_16": 0.271,
+  "energy_kwh_weighted": {
+    "p10": 0.847,
+    "median": 4.679,
+    "mean": 7.19,
+    "p90": 15.833
+  }
+}

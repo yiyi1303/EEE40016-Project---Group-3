@@ -1,0 +1,25 @@
+{
+  "D5_ambient": {
+    "source": "Bureau of Meteorology, latest observations product IDV60901, station Melbourne (Olympic Park) (95936)",
+    "date": "20260930",
+    "observations_used": 50,
+    "resolution": "half-hourly observed, linearly interpolated to 1 minute",
+    "evening_16_22_range_c": [
+      19.9,
+      24.6
+    ],
+    "copyright": "Commonwealth of Australia 2026, Bureau of Meteorology",
+    "note": "An early-spring observation standing in for the late-spring day of Table 7, because a November record does not exist yet. Replace with a November observation when one is available; the file format stays the same."
+  },
+  "D3_pv": {
+    "model": "Ineichen-Perez clear sky, pvlib 0.16.1",
+    "date": "2026-11-18",
+    "site": "Melbourne, lat -37.8136 lon 144.9631",
+    "plane": "tilt 20 deg, facing north",
+    "system": "6.6 kW DC on a 5.0 kW inverter, 85% system efficiency",
+    "cloud_transient": "16:40-16:55, irradiance at 25% of clear sky",
+    "output_at_16_00_kw": 4.33,
+    "output_ends": "20:01",
+    "note": "System size and orientation are not specified in the plan; these are the commonest Australian residential arrangement. PV runs at unity power factor with no volt-var or volt-watt response, which the plan does not ask for."
+  }
+}

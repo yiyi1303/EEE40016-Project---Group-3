@@ -1,0 +1,12 @@
+{
+  "seed": 7,
+  "source": "vista",
+  "provenance": "VISTA 2024-2025 trips, Transport Victoria open data, fitted by src/vista_sessions.py (data item D4)",
+  "parameters": {
+    "see": "data/vista/ev_sessions_summary.json",
+    "plugin_model": "daily",
+    "plugin_p": 1.0,
+    "warmup_days": 0
+  },
+  "sessions": []
+}
