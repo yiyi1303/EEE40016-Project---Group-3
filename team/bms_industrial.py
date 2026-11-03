@@ -671,8 +671,10 @@ class IndustrialBMS:
         d.report("CELL_UV_MSL", m.v_cell_min <= c.v_min_msl)
         d.report("CELL_OV_RSL", m.v_cell_max >= c.v_max_rsl)
         d.report("CELL_UV_RSL", m.v_cell_min <= c.v_min_rsl)
-        dis = m.i_pack > c.i_direction_thr_a      # rest counts as "discharge" (as foxBMS)
-        pre = "chg" if chg else "dis"
+        # As foxBMS soa.c: only a discharging pack uses the discharge set; charging AND
+        # rest use the (stricter) charge set.
+        dis = m.i_pack > c.i_direction_thr_a
+        pre = "dis" if dis else "chg"
         lim = lambda n, lvl: getattr(c, f"{n}_{pre}_{lvl}")
         d.report("TEMP_HIGH_MSL", m.t_max >= lim("t_max", "msl"))
         d.report("TEMP_LOW_MSL", m.t_min <= lim("t_min", "msl"))

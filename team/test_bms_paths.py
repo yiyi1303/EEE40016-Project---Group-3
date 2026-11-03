@@ -91,11 +91,12 @@ bms, rows = run(cfg, 0.50, cmd_stream(0.0, state=ReqState.STANDBY), 320, bms_soc
 assert abs(bms.soc_trk.soc - 0.40) < 0.01, "must not recalibrate on the plateau"
 print("  plateau: stays 0.40 (truth 0.50) - recalibration correctly refuses to guess")
 
-print("\nTEST H: cold pack (-12 C): charge blocked by derating before any limit trips; no ERROR")
+print("\nTEST H: cold pack (-12 C), charge requested: no charge is applied, and at rest the")
+print("        charge-side low-temperature MSL (-10 C) applies, as in foxBMS -> ERROR")
 bms, rows = run(cfg, 0.6, cmd_stream(-30.0), 30, plant_kw=dict(temp0=-12.0))
-assert all(o.state != BMSState.ERROR for _, o, _, _ in rows)
-assert max(-o.p_kw for _, o, _, _ in rows) < 1e-6, "charging below ~-10C must be blocked"
-print("  OK -> charge power applied: 0 kW")
+assert max(-o.p_kw for _, o, _, _ in rows) < 1e-6, "charging below -10 C must never be applied"
+assert rows[-1][1].state == BMSState.ERROR and "TEMP_LOW_MSL" in rows[-1][1].errors
+print("  OK -> charge power applied: 0 kW; ERROR on", rows[-1][1].errors)
 
 def trust_stream(p, exp, imp, trust, valid_for=math.inf):
     st = {"seq": 0}
